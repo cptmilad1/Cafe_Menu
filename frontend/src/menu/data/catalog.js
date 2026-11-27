@@ -1,5 +1,9 @@
-// Sample catalog. Field names mirror the `categories` and `products` tables in database/schema.
-// Replace with API data once a customer-facing menu endpoint is agreed (see docs/agent-handoffs/customer-order-api.md).
+import axios from 'axios'
+import request from '../../share/shared/request'
+
+
+
+
 export const categories = [
   { id: 1, name: 'Coffee', description: 'Single-origin espresso and slow brews.' },
   { id: 2, name: 'Tea', description: 'Loose-leaf teas steeped to order.' },

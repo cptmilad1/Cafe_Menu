@@ -1,0 +1,38 @@
+import axios from 'axios'
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
+})
+
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config
+    const isUnauthorized = error.response?.status === 401
+    const isRefreshRequest = originalRequest?.url?.includes('/auth/refresh')
+    if (isUnauthorized && originalRequest && !originalRequest._retry && !isRefreshRequest) {
+      originalRequest._retry = true
+    }
+
+    const payload = error.response?.data || {}
+    const details = payload.error?.map((issue) => issue.message).join(' ')
+    const message = details || payload.message || 'Something went wrong. Please try again.'
+    return Promise.reject(new Error(message))
+  }
+)
+
+async function request(path, options = {}) {
+  const normalizedPath = path.replace(/^\/+/, '')
+
+  const response = await api.request({
+    url: normalizedPath,
+    method: options?.method || 'POST',
+    data: options?.body,
+    headers: options?.headers,
+    params: options?.params,
+  })
+
+  return response.data
+}
+export default request

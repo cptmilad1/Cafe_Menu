@@ -1,9 +1,8 @@
 import { create } from 'zustand'
 
-// Local-only order state. Nothing is sent to the backend until the order API contract is confirmed.
 export const useOrderStore = create((set, get) => ({
-  lines: {}, // { [productId]: { product, quantity } }
-  placed: null, // { number, name, table, items, total } once handed to the barista
+  lines: {},
+  placed: null,
 
   addItem: (product) =>
     set((state) => {

@@ -52,7 +52,9 @@ const BaristaSection = () => {
                   <li
                     key={step}
                     aria-current={index === 0 ? 'step' : undefined}
-                    className={`rounded-full border px-3 py-1 ${index === 0 ? 'border-transparent bg-caramel-400 text-roast-950' : 'border-crema-200/40 text-crema-200'}`}
+                    className={`rounded-full border px-3 py-1 
+                    ${index === 0 ? 'border-transparent bg-caramel-400 text-roast-950'
+                        : 'border-crema-200/40 text-crema-200'}`}
                   >
                     {step}
                   </li>
