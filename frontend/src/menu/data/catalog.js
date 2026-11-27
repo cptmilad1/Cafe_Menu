@@ -2,7 +2,7 @@ import axios from 'axios'
 import request from '../../share/shared/request'
 
 
-
+const category = request('/categories', {method : "GET"})
 
 export const categories = [
   { id: 1, name: 'Coffee', description: 'Single-origin espresso and slow brews.' },
